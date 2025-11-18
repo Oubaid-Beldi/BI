@@ -11,6 +11,7 @@ A comprehensive Extract, Transform, Load (ETL) pipeline for cleaning and analyzi
 **→ Start here: [GETTING_STARTED.md](GETTING_STARTED.md)**
 
 Quick setup after cloning:
+
 ```bash
 # Step 1: Clean the data
 pip install pandas numpy
@@ -146,6 +147,7 @@ python et_analysis_and_execution.py
 ```
 
 The pipeline will:
+
 1. Extract all CSV and JSON metadata files
 2. Analyze data quality issues
 3. Generate transformation plan
@@ -155,6 +157,7 @@ The pipeline will:
 ### Load to Database
 
 #### PostgreSQL Example
+
 ```bash
 # Create database
 createdb energy_environmental_db
@@ -164,6 +167,7 @@ psql energy_environmental_db -c "\copy co2_emissions FROM 'cleaned_data/co2_emis
 ```
 
 #### Python/Pandas Example
+
 ```python
 import pandas as pd
 from sqlalchemy import create_engine
@@ -195,13 +199,13 @@ renewable_trends = electricity[electricity['entity'] == 'United States'][
 
 ## 📊 Data Quality Metrics
 
-| Dataset | Completeness | Consistency | Accuracy | Data Retention |
-|---------|--------------|-------------|----------|----------------|
-| CO2 Emissions | 100% | ✓ High | ✓ Verified | 100% |
-| Electricity | 100% | ✓ High | ✓ Verified | 100% |
-| Oil Production | 100% | ✓ High | ✓ Verified | 100% |
-| Energy Prod/Cons | 100% | ✓ High | ✓ Verified | 100% |
-| NYMEX Prices | 98.4% | ✓ High | ✓ Market Data | 100% |
+| Dataset          | Completeness | Consistency | Accuracy       | Data Retention |
+| ---------------- | ------------ | ----------- | -------------- | -------------- |
+| CO2 Emissions    | 100%         | ✓ High     | ✓ Verified    | 100%           |
+| Electricity      | 100%         | ✓ High     | ✓ Verified    | 100%           |
+| Oil Production   | 100%         | ✓ High     | ✓ Verified    | 100%           |
+| Energy Prod/Cons | 100%         | ✓ High     | ✓ Verified    | 100%           |
+| NYMEX Prices     | 98.4%        | ✓ High     | ✓ Market Data | 100%           |
 
 **Overall Data Quality Score: 99.2%**
 
@@ -221,6 +225,7 @@ renewable_trends = electricity[electricity['entity'] == 'United States'][
 ## 🔍 Sample Queries
 
 ### Top 10 CO2 Emitters (2024)
+
 ```sql
 SELECT entity, annual_co2_emissions, code
 FROM co2_emissions
@@ -230,6 +235,7 @@ LIMIT 10;
 ```
 
 ### Renewable Energy Adoption Trends
+
 ```sql
 SELECT entity, year, pct_renewable, pct_fossil
 FROM electricity_production
@@ -239,6 +245,7 @@ ORDER BY entity, year;
 ```
 
 ### Net Energy Exporters
+
 ```sql
 SELECT entity, production_based_energy, consumption_based_energy, net_energy_trade_twh
 FROM energy_prod_cons
@@ -283,9 +290,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📧 Contact
 
-- **Author**: Jasseur Chibani
-- **GitHub**: [@jasseurchibani](https://github.com/jasseurchibani)
-- **Repository**: [bi](https://github.com/jasseurchibani/bi)
+- **Author**: Jasseur Chibani && Oubaid Beldi
 
 ## 🙏 Acknowledgments
 
@@ -296,6 +301,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Last Updated**: November 18, 2025  
-**Pipeline Version**: 1.0  
+**Last Updated**: November 18, 2025
+**Pipeline Version**: 1.0
 **Data Quality Certification**: PASSED ✓
