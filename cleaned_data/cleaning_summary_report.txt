@@ -1,0 +1,140 @@
+================================================================================
+DATA CLEANING AND TRANSFORMATION SUMMARY REPORT
+================================================================================
+Generated: 2025-11-18 23:20:41
+
+
+============================================================
+Dataset: CO2_EMISSIONS
+============================================================
+Original rows: 29,384
+Cleaned rows: 29,384
+Rows removed: 0
+
+Executed Steps:
+  1. ✓ standardize_column_names: Standardized 4 column names
+  2. ✓ validate_years: Validated years, removed 0 invalid entries
+  3. ✓ add_metadata_columns: Added metadata columns
+  4. ✓ normalize_entities: Added entity_type classification
+
+Final columns (8):
+  - entity (object)
+  - code (object)
+  - year (int64)
+  - annual_co2_emissions (float64)
+  - data_source (object)
+  - data_quality_flag (object)
+  - last_updated (object)
+  - entity_type (object)
+
+============================================================
+Dataset: ELECTRICITY_PRODUCTION
+============================================================
+Original rows: 6,917
+Cleaned rows: 6,917
+Rows removed: 0
+
+Executed Steps:
+  1. ✓ standardize_column_names: Standardized 12 column names
+  2. ✓ validate_years: Validated years, removed 0 invalid entries
+  3. ✓ add_metadata_columns: Added metadata columns
+  4. ✓ calculate_totals: Calculated total from 9 sources
+  5. ✓ calculate_percentages: Calculated percentage contributions
+  6. ✓ normalize_entities: Added entity_type classification
+
+Final columns (20):
+  - entity (object)
+  - code (object)
+  - year (int64)
+  - other_renewables_excluding_bioenergy_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_bioenergy_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_solar_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_wind_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_hydro_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_nuclear_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_oil_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_gas_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - electricity_from_coal_twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked (float64)
+  - data_source (object)
+  - data_quality_flag (object)
+  - last_updated (object)
+  - total_electricity_twh (float64)
+  - pct_renewable (float64)
+  - pct_fossil (float64)
+  - pct_nuclear (float64)
+  - entity_type (object)
+
+============================================================
+Dataset: OIL_PRODUCTION
+============================================================
+Original rows: 750
+Cleaned rows: 750
+Rows removed: 0
+
+Executed Steps:
+  1. ✓ standardize_column_names: Standardized 4 column names
+  2. ✓ validate_years: Validated years, removed 0 invalid entries
+  3. ✓ add_metadata_columns: Added metadata columns
+  4. ✓ normalize_entities: Added entity_type classification
+
+Final columns (8):
+  - entity (object)
+  - code (object)
+  - year (int64)
+  - oil_production_twh (float64)
+  - data_source (object)
+  - data_quality_flag (object)
+  - last_updated (object)
+  - entity_type (object)
+
+============================================================
+Dataset: ENERGY_PROD_CONS
+============================================================
+Original rows: 1,113
+Cleaned rows: 1,113
+Rows removed: 0
+
+Executed Steps:
+  1. ✓ standardize_column_names: Standardized 5 column names
+  2. ✓ validate_years: Validated years, removed 0 invalid entries
+  3. ✓ add_metadata_columns: Added metadata columns
+  4. ✓ calculate_difference: Calculated net energy trade
+  5. ✓ normalize_entities: Added entity_type classification
+
+Final columns (11):
+  - entity (object)
+  - code (object)
+  - year (int64)
+  - consumption_based_energy (float64)
+  - production_based_energy (float64)
+  - data_source (object)
+  - data_quality_flag (object)
+  - last_updated (object)
+  - net_energy_trade_twh (float64)
+  - is_net_exporter (bool)
+  - entity_type (object)
+
+============================================================
+Dataset: NYMEX_GAS_PRICES
+============================================================
+Original rows: 1,224
+Cleaned rows: 1,224
+Rows removed: 0
+
+Executed Steps:
+  1. ✓ standardize_column_names: Standardized 7 column names
+  2. ✗ standardize_dates: Can only use .dt accessor with datetimelike values
+  3. ⊘ normalize_entities: Step not implemented or not applicable
+
+Final columns (7):
+  - time (object)
+  - open (float64)
+  - high (float64)
+  - low (float64)
+  - close (float64)
+  - volume (int64)
+  - volume_ma (float64)
+
+================================================================================
+END OF REPORT
+================================================================================

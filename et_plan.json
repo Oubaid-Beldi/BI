@@ -1,0 +1,593 @@
+{
+  "metadata": {
+    "plan_created": "2025-11-18T23:20:40.796230",
+    "total_datasets": 5,
+    "plan_version": "1.0"
+  },
+  "datasets": {
+    "co2_emissions": {
+      "extraction": {
+        "source_file": "co2_emissions",
+        "encoding": "utf-8",
+        "rows": 29384,
+        "columns": [
+          "Entity",
+          "Code",
+          "Year",
+          "Annual CO\u2082 emissions"
+        ]
+      },
+      "cleaning": [
+        {
+          "step": "standardize_column_names",
+          "action": "Convert to snake_case, remove special characters",
+          "columns": [
+            "Annual CO\u2082 emissions"
+          ]
+        },
+        {
+          "step": "validate_years",
+          "column": "Year",
+          "action": "Ensure all years are integers between 1750 and 2025",
+          "current_range": "1750 to 2024"
+        }
+      ],
+      "transformation": [
+        {
+          "step": "add_metadata_columns",
+          "action": "Add source, citation, and data quality flags",
+          "metadata_fields": [
+            "citation",
+            "lastUpdated"
+          ]
+        },
+        {
+          "step": "normalize_entities",
+          "action": "Standardize country names, flag aggregates vs individual countries",
+          "new_column": "entity_type"
+        }
+      ],
+      "validation": [
+        {
+          "column": "Annual CO\u2082 emissions",
+          "rule": "check_unit_consistency",
+          "expected_unit": "tonnes"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1750-2024"
+        }
+      ],
+      "final_schema": {
+        "entity": {
+          "type": "string",
+          "nullable": false,
+          "description": "Country or region name"
+        },
+        "code": {
+          "type": "string",
+          "nullable": true,
+          "description": "ISO 3166-1 alpha-3 code"
+        },
+        "year": {
+          "type": "int16",
+          "nullable": false,
+          "description": "Year of observation"
+        },
+        "annual_co\u2082_emissions": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "tonnes",
+          "description": "Annual total emissions of carbon dioxide (CO\u2082), excluding land-use change, measured in tonnes."
+        }
+      }
+    },
+    "electricity_production": {
+      "extraction": {
+        "source_file": "electricity_production",
+        "encoding": "utf-8",
+        "rows": 6917,
+        "columns": [
+          "Entity",
+          "Code",
+          "Year",
+          "Other renewables excluding bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from solar - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from wind - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from hydro - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from nuclear - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from oil - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from gas - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "Electricity from coal - TWh (adapted for visualization of chart electricity-prod-source-stacked)"
+        ]
+      },
+      "cleaning": [
+        {
+          "step": "standardize_column_names",
+          "action": "Convert to snake_case, remove special characters",
+          "columns": [
+            "Other renewables excluding bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from solar - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from wind - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from hydro - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from nuclear - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from oil - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from gas - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+            "Electricity from coal - TWh (adapted for visualization of chart electricity-prod-source-stacked)"
+          ]
+        },
+        {
+          "step": "validate_years",
+          "column": "Year",
+          "action": "Ensure all years are integers between 1750 and 2025",
+          "current_range": "1985 to 2024"
+        }
+      ],
+      "transformation": [
+        {
+          "step": "add_metadata_columns",
+          "action": "Add source, citation, and data quality flags",
+          "metadata_fields": [
+            "citation",
+            "lastUpdated"
+          ]
+        },
+        {
+          "step": "calculate_totals",
+          "action": "Sum all electricity sources to get total generation",
+          "new_column": "total_electricity_twh"
+        },
+        {
+          "step": "calculate_percentages",
+          "action": "Calculate percentage contribution of each source",
+          "new_columns": [
+            "pct_renewable",
+            "pct_fossil",
+            "pct_nuclear"
+          ]
+        },
+        {
+          "step": "normalize_entities",
+          "action": "Standardize country names, flag aggregates vs individual countries",
+          "new_column": "entity_type"
+        }
+      ],
+      "validation": [
+        {
+          "column": "Other renewables excluding bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from bioenergy - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from solar - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from wind - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from hydro - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from nuclear - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from oil - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from gas - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        },
+        {
+          "column": "Electricity from coal - TWh (adapted for visualization of chart electricity-prod-source-stacked)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1985-2024"
+        }
+      ],
+      "final_schema": {
+        "entity": {
+          "type": "string",
+          "nullable": false,
+          "description": "Country or region name"
+        },
+        "code": {
+          "type": "string",
+          "nullable": true,
+          "description": "ISO 3166-1 alpha-3 code"
+        },
+        "year": {
+          "type": "int16",
+          "nullable": false,
+          "description": "Year of observation"
+        },
+        "other_renewables_excluding_bioenergy___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_bioenergy___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_solar___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_wind___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_hydro___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_nuclear___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_oil___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_gas___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        },
+        "electricity_from_coal___twh_adapted_for_visualization_of_chart_electricity_prod_source_stacked": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        }
+      }
+    },
+    "oil_production": {
+      "extraction": {
+        "source_file": "oil_production",
+        "encoding": "utf-8",
+        "rows": 750,
+        "columns": [
+          "Entity",
+          "Code",
+          "Year",
+          "Oil production (TWh)"
+        ]
+      },
+      "cleaning": [
+        {
+          "step": "standardize_column_names",
+          "action": "Convert to snake_case, remove special characters",
+          "columns": [
+            "Oil production (TWh)"
+          ]
+        },
+        {
+          "step": "validate_years",
+          "column": "Year",
+          "action": "Ensure all years are integers between 1750 and 2025",
+          "current_range": "1900 to 2024"
+        }
+      ],
+      "transformation": [
+        {
+          "step": "add_metadata_columns",
+          "action": "Add source, citation, and data quality flags",
+          "metadata_fields": [
+            "citation",
+            "lastUpdated"
+          ]
+        },
+        {
+          "step": "normalize_entities",
+          "action": "Standardize country names, flag aggregates vs individual countries",
+          "new_column": "entity_type"
+        }
+      ],
+      "validation": [
+        {
+          "column": "Oil production (TWh)",
+          "rule": "check_unit_consistency",
+          "expected_unit": "terawatt-hours"
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": "1900-2024"
+        }
+      ],
+      "final_schema": {
+        "entity": {
+          "type": "string",
+          "nullable": false,
+          "description": "Country or region name"
+        },
+        "code": {
+          "type": "string",
+          "nullable": true,
+          "description": "ISO 3166-1 alpha-3 code"
+        },
+        "year": {
+          "type": "int16",
+          "nullable": false,
+          "description": "Year of observation"
+        },
+        "oil_production_twh": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "terawatt-hours",
+          "description": "Measured in [terawatt-hours](#dod:watt-hours)."
+        }
+      }
+    },
+    "energy_prod_cons": {
+      "extraction": {
+        "source_file": "energy_prod_cons",
+        "encoding": "utf-8",
+        "rows": 1113,
+        "columns": [
+          "Entity",
+          "Code",
+          "Year",
+          "consumption_based_energy",
+          "production_based_energy"
+        ]
+      },
+      "cleaning": [
+        {
+          "step": "standardize_column_names",
+          "action": "Convert to snake_case, remove special characters",
+          "columns": []
+        },
+        {
+          "step": "validate_years",
+          "column": "Year",
+          "action": "Ensure all years are integers between 1750 and 2025",
+          "current_range": "1995 to 2020"
+        }
+      ],
+      "transformation": [
+        {
+          "step": "add_metadata_columns",
+          "action": "Add source, citation, and data quality flags",
+          "metadata_fields": [
+            "citation",
+            "lastUpdated"
+          ]
+        },
+        {
+          "step": "calculate_difference",
+          "action": "Calculate net trade (production - consumption)",
+          "new_column": "net_energy_trade_twh"
+        },
+        {
+          "step": "normalize_entities",
+          "action": "Standardize country names, flag aggregates vs individual countries",
+          "new_column": "entity_type"
+        }
+      ],
+      "validation": [
+        {
+          "column": "consumption_based_energy",
+          "rule": "check_unit_consistency",
+          "expected_unit": ""
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": ""
+        },
+        {
+          "column": "production_based_energy",
+          "rule": "check_unit_consistency",
+          "expected_unit": ""
+        },
+        {
+          "column": "Year",
+          "rule": "check_timespan",
+          "expected_range": ""
+        }
+      ],
+      "final_schema": {
+        "entity": {
+          "type": "string",
+          "nullable": false,
+          "description": "Country or region name"
+        },
+        "code": {
+          "type": "string",
+          "nullable": true,
+          "description": "ISO 3166-1 alpha-3 code"
+        },
+        "year": {
+          "type": "int16",
+          "nullable": false,
+          "description": "Year of observation"
+        },
+        "consumption_based_energy": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "",
+          "description": ""
+        },
+        "production_based_energy": {
+          "type": "float32",
+          "nullable": true,
+          "unit": "",
+          "description": ""
+        }
+      }
+    },
+    "nymex_gas_prices": {
+      "extraction": {
+        "source_file": "nymex_gas_prices",
+        "encoding": "utf-8",
+        "rows": 1224,
+        "columns": [
+          "time",
+          "open",
+          "high",
+          "low",
+          "close",
+          "Volume",
+          "Volume MA"
+        ]
+      },
+      "cleaning": [
+        {
+          "step": "standardize_column_names",
+          "action": "Convert to snake_case, remove special characters",
+          "columns": [
+            "Volume MA"
+          ]
+        },
+        {
+          "step": "standardize_dates",
+          "column": "time",
+          "action": "Parse ISO datetime to datetime64, extract date only",
+          "target_format": "YYYY-MM-DD"
+        }
+      ],
+      "transformation": [
+        {
+          "step": "normalize_entities",
+          "action": "Standardize country names, flag aggregates vs individual countries",
+          "new_column": "entity_type"
+        }
+      ],
+      "validation": {},
+      "final_schema": {
+        "date": {
+          "type": "datetime64",
+          "nullable": false,
+          "description": "Date of observation"
+        }
+      }
+    }
+  },
+  "integration": {
+    "joins": [
+      {
+        "type": "inner_join",
+        "datasets": [
+          "co2_emissions",
+          "electricity_production",
+          "oil_production",
+          "energy_prod_cons"
+        ],
+        "on": [
+          "entity",
+          "code",
+          "year"
+        ],
+        "description": "Join all energy datasets by country and year",
+        "result_name": "integrated_energy_data"
+      }
+    ],
+    "common_dimensions": {
+      "co2_emissions": [
+        "Entity",
+        "Year",
+        "Code"
+      ],
+      "electricity_production": [
+        "Entity",
+        "Year",
+        "Code"
+      ],
+      "oil_production": [
+        "Entity",
+        "Year",
+        "Code"
+      ],
+      "energy_prod_cons": [
+        "Entity",
+        "Year",
+        "Code"
+      ]
+    },
+    "recommendations": [
+      "Create a master dimension table for countries with codes and regions",
+      "Create a time dimension table for years with metadata",
+      "Consider star schema with fact tables for metrics",
+      "NYMEX gas prices are time-series data at daily level - keep separate or aggregate to yearly"
+    ]
+  }
+}

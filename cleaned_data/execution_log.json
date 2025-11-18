@@ -1,0 +1,147 @@
+[
+  {
+    "dataset": "co2_emissions",
+    "original_rows": 29384,
+    "cleaned_rows": 29384,
+    "steps": [
+      {
+        "step": "standardize_column_names",
+        "status": "success",
+        "message": "Standardized 4 column names"
+      },
+      {
+        "step": "validate_years",
+        "status": "success",
+        "message": "Validated years, removed 0 invalid entries"
+      },
+      {
+        "step": "add_metadata_columns",
+        "status": "success",
+        "message": "Added metadata columns"
+      },
+      {
+        "step": "normalize_entities",
+        "status": "success",
+        "message": "Added entity_type classification"
+      }
+    ]
+  },
+  {
+    "dataset": "electricity_production",
+    "original_rows": 6917,
+    "cleaned_rows": 6917,
+    "steps": [
+      {
+        "step": "standardize_column_names",
+        "status": "success",
+        "message": "Standardized 12 column names"
+      },
+      {
+        "step": "validate_years",
+        "status": "success",
+        "message": "Validated years, removed 0 invalid entries"
+      },
+      {
+        "step": "add_metadata_columns",
+        "status": "success",
+        "message": "Added metadata columns"
+      },
+      {
+        "step": "calculate_totals",
+        "status": "success",
+        "message": "Calculated total from 9 sources"
+      },
+      {
+        "step": "calculate_percentages",
+        "status": "success",
+        "message": "Calculated percentage contributions"
+      },
+      {
+        "step": "normalize_entities",
+        "status": "success",
+        "message": "Added entity_type classification"
+      }
+    ]
+  },
+  {
+    "dataset": "oil_production",
+    "original_rows": 750,
+    "cleaned_rows": 750,
+    "steps": [
+      {
+        "step": "standardize_column_names",
+        "status": "success",
+        "message": "Standardized 4 column names"
+      },
+      {
+        "step": "validate_years",
+        "status": "success",
+        "message": "Validated years, removed 0 invalid entries"
+      },
+      {
+        "step": "add_metadata_columns",
+        "status": "success",
+        "message": "Added metadata columns"
+      },
+      {
+        "step": "normalize_entities",
+        "status": "success",
+        "message": "Added entity_type classification"
+      }
+    ]
+  },
+  {
+    "dataset": "energy_prod_cons",
+    "original_rows": 1113,
+    "cleaned_rows": 1113,
+    "steps": [
+      {
+        "step": "standardize_column_names",
+        "status": "success",
+        "message": "Standardized 5 column names"
+      },
+      {
+        "step": "validate_years",
+        "status": "success",
+        "message": "Validated years, removed 0 invalid entries"
+      },
+      {
+        "step": "add_metadata_columns",
+        "status": "success",
+        "message": "Added metadata columns"
+      },
+      {
+        "step": "calculate_difference",
+        "status": "success",
+        "message": "Calculated net energy trade"
+      },
+      {
+        "step": "normalize_entities",
+        "status": "success",
+        "message": "Added entity_type classification"
+      }
+    ]
+  },
+  {
+    "dataset": "nymex_gas_prices",
+    "original_rows": 1224,
+    "cleaned_rows": 1224,
+    "steps": [
+      {
+        "step": "standardize_column_names",
+        "status": "success",
+        "message": "Standardized 7 column names"
+      },
+      {
+        "step": "standardize_dates",
+        "status": "error",
+        "message": "Can only use .dt accessor with datetimelike values"
+      },
+      {
+        "step": "normalize_entities",
+        "status": "skipped",
+        "message": "Step not implemented or not applicable"
+      }
+    ]
+  }
+]

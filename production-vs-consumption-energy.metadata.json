@@ -1,0 +1,37 @@
+{
+  "chart": {
+    "title": "Production-based vs. consumption-based energy use",
+    "subtitle": "Consumption-based (trade-adjusted) energy use measures domestic energy use minus energy used to produce exported goods, plus energy used to produce imported goods. Measured in [terawatt-hours](#dod:watt-hours).",
+    "citation": "Calculated by Viktoras Kulionis, based on the EXIOBASE v3.8.2 database",
+    "originalChartUrl": "https://ourworldindata.org/grapher/production-vs-consumption-energy?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "United Kingdom"
+    ]
+  },
+  "columns": {
+    "consumption_based_energy": {
+      "titleShort": "Consumption-based",
+      "titleLong": "Consumption-based",
+      "unit": "",
+      "timespan": "",
+      "type": "Numeric",
+      "owidVariableId": 179998,
+      "citationShort": " – processed by Our World in Data",
+      "citationLong": " – processed by Our World in Data. “Consumption-based” [dataset]. Calculated by Viktoras Kulionis, based on the EXIOBASE v3.8.2 database [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/179998.metadata.json"
+    },
+    "production_based_energy": {
+      "titleShort": "Production-based",
+      "titleLong": "Production-based",
+      "unit": "",
+      "timespan": "",
+      "type": "Numeric",
+      "owidVariableId": 180001,
+      "citationShort": " – processed by Our World in Data",
+      "citationLong": " – processed by Our World in Data. “Production-based” [dataset]. Calculated by Viktoras Kulionis, based on the EXIOBASE v3.8.2 database [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/180001.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-11-18",
+  "activeFilters": {}
+}
