@@ -35,6 +35,7 @@ This project processes and cleans **39,388 records** across 5 major datasets spa
 Python 3.13+
 pandas
 numpy
+Docker & Docker Compose (for database setup)
 ```
 
 ### Installation
@@ -51,6 +52,21 @@ pip install pandas numpy
 python et_analysis_and_execution.py
 ```
 
+### Load Data into PostgreSQL (Docker)
+
+```bash
+# One-command setup (recommended)
+./setup_database.sh
+
+# Or using Makefile
+make setup
+
+# Check status
+./status.sh
+```
+
+**See [DATABASE_SETUP.md](DATABASE_SETUP.md) for complete database setup instructions.**
+
 ## 📁 Project Structure
 
 ```
@@ -64,11 +80,22 @@ python et_analysis_and_execution.py
 │   ├── execution_log.json                 # Detailed operation log
 │   └── cleaning_summary_report.txt        # Human-readable summary
 │
+├── sql/                                   # Database setup
+│   └── 01_create_tables.sql               # PostgreSQL schema
+│
 ├── et_analysis_and_execution.py           # Main ETL pipeline
 ├── et_plan.json                           # Machine-readable transformation plan
 │
+├── docker-compose.yml                     # Docker PostgreSQL setup
+├── setup_database.sh                      # One-command database setup ⭐
+├── load_data.sh                           # Bash data loader
+├── load_data.py                           # Python data loader
+├── status.sh                              # Health check script
+├── Makefile                               # Convenient commands
+│
+├── DATABASE_SETUP.md                      # Complete database setup guide ⭐
 ├── COMPREHENSIVE_ET_PLAN_AND_EXECUTION_REPORT.md  # 54-page full analysis
-├── DATABASE_LOADING_GUIDE.md              # SQL import instructions
+├── DATABASE_LOADING_GUIDE.md              # Alternative loading methods
 ├── PROJECT_SUMMARY.md                     # Executive overview
 │
 ├── annual-co2-emissions-per-country.csv   # Raw data
