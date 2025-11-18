@@ -6,6 +6,22 @@
 
 A comprehensive Extract, Transform, Load (ETL) pipeline for cleaning and analyzing energy and environmental datasets including CO2 emissions, electricity production, oil production, and energy trade data.
 
+## 🚀 New to this Project?
+
+**→ Start here: [GETTING_STARTED.md](GETTING_STARTED.md)**
+
+Quick setup after cloning:
+```bash
+# Step 1: Clean the data
+pip install pandas numpy
+python3 et_analysis_and_execution.py
+
+# Step 2: Load into database
+./setup_database.sh
+```
+
+**Done! Database ready in ~40 seconds.**
+
 ## 📊 Project Overview
 
 This project processes and cleans **39,388 records** across 5 major datasets spanning **1750-2024**, achieving a **99.2% data quality score** with **100% data retention**.
